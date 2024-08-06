@@ -3,7 +3,7 @@ requires = ["hatchling", "typing_extensions"]
 build-backend = "hatchling.build"
 
 [project]
-name = "wandb"
+name = "custom-wandb"
 dynamic = ["version"]
 description = "A CLI and library for interacting with the Weights & Biases API."
 authors = [{ name = "Weights & Biases", email = "support@wandb.com" }]
