@@ -951,21 +951,22 @@ func (h *Handler) handlePartialHistorySync(request *spb.PartialHistoryRequest) {
 		if step > current {
 			h.flushPartialHistory(true, step)
 		} else if step < current {
-			h.logger.Warn(
-				"handler: ignoring partial history record",
-				"step", step,
-				"current", current,
-			)
+			// h.logger.Warn(
+			// 	"handler: ignoring partial history record",
+			// 	"step", step,
+			// 	"current", current,
+			// )
 
-			h.terminalPrinter.Writef(
-				"Tried to log to step %d that is less than the current step %d."+
-					" Steps must be monotonically increasing, so this data"+
-					" will be ignored. See https://wandb.me/define-metric"+
-					" to log data out of order.",
-				step,
-				current,
-			)
-			return
+			// h.terminalPrinter.Writef(
+			// 	"Tried to log to step %d that is less than the current step %d."+
+			// 		" Steps must be monotonically increasing, so this data"+
+			// 		" will be ignored. See https://wandb.me/define-metric"+
+			// 		" to log data out of order.",
+			// 	step,
+			// 	current,
+			// )
+			// return
+			h.flushPartialHistory(true, step)
 		}
 	}
 

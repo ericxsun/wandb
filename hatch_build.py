@@ -145,7 +145,8 @@ class CustomBuildHook(BuildHookInterface):
         try:
             import subprocess
 
-            src_dir = pathlib.Path(__file__).parent
+            src_dir = os.getenv("_WANDB_ROOT_DIR") or pathlib.Path(__file__).parent
+            self.app.display_warning(f"Getting commit from src_dir={src_dir}")
             commit = (
                 subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=src_dir)
                 .decode("utf-8")
@@ -153,6 +154,7 @@ class CustomBuildHook(BuildHookInterface):
             )
             return commit
         except Exception:
+            self.app.display_warning(f"Getting commit failed")
             return ""
 
     def _build_wandb_core(self) -> List[str]:
